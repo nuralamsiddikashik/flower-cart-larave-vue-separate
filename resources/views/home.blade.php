@@ -1,0 +1,1 @@
+<h1>I am taking from home template</h1>
