@@ -24,6 +24,6 @@ interface CategoryRepositoryInterface {
      * @param array $data
      * @return mixed
      */
-    public function update( $id );
+    public function update( $id, $data );
 
 }

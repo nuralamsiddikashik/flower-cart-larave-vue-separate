@@ -13,17 +13,25 @@ class CategoryRepository implements CategoryRepositoryInterface {
     }
 
     public function get() {
-
+        $categories = $this->model->select( 'id', 'name', 'image' );
+        return $categories->get();
     }
     public function find( $id ) {
-
+        return $this->model->find( $id );
     }
     public function store( $data ) {
+
         return $this->model->create( [
-            'name' => $data['name'],
+            'name'  => $data['name'],
+            'image' => $data['upload']['file_name'] ?? null,
+
         ] );
     }
-    public function update( $id ) {
-
+    public function update( $id, $data ) {
+        $category = $this->model->find( $id );
+        $category->update( [
+            'name'  => $data['name'],
+            'image' => $data['upload']['file_name'] ?? $category->image,
+        ] );
     }
 }

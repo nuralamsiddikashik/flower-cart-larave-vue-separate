@@ -160,51 +160,29 @@
         </div>
         
         <div class="row mt-lg-5">
-            <div class="col-md-4">
-                <form action="{{route('admin.categories.store')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-file">
-                            <label for="image"></label>
-                            <input type="file" class="form-control-file" name="image" id="image">
-                          </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
+         
             <div class="col-md-8 mt-2">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table">
-                           <thead>
-                               <tr>
-                                   {{-- <th>ID</th> --}}
-                                   <th>SL</th>
-                                   <th>Name</th>
-                                   <th>Image</th>
-                                   <th>Action</th>
-                                   
-                               </tr>
-                           </thead>
-                           <tbody>
-                               @foreach ($categories as $item)
-                               <tr>
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->image}}</td>
-                                   <td>
-                                    <a href="{{route('admin.categories.edit',$item->id)}}">Edit</a>       
-                                </td> 
-                               </tr>
-                               @endforeach
-                               
-                           </tbody>
-                        </table>
+                        <form action="{{route('admin.categories.update', $category->id)}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" value="{{$category->name}}">
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <label for="image"></label>
+                                    <input type="file" class="form-control-file" name="image" id="image">
+                                  </div>
+                            </div>
+                            <div class="form-group">
+                                <img src="{{asset($category->image)}}" alt="">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -220,7 +198,8 @@
 @endsection
 {{-- @push('js')
     <script>
-        let CategoryListRoute = '{{ route('api.category.list')}}'
+        let CategoryListRoute = '{{ route('api.category.list')}}'; 
+       
     </script>
     <script type="module" src="{{asset('js/pages/category.js')}}"></script>
 @endpush --}}
