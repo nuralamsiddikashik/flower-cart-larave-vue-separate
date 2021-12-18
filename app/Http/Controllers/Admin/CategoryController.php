@@ -32,7 +32,7 @@ class CategoryController extends Controller {
         try {
             $data = $this->validate( $this->request, [
                 'name'  => 'required|string|min:3|max:255',
-                'image' => ['required', 'mimes:jpg,jepg,pdf,docs,png', 'max:2048'],
+                'image' => ['required', 'mimes:jpg,jpeg,pdf,docs,png', 'max:2048'],
             ] );
             $data['upload'] = [
                 'file_name'    => null,
@@ -80,7 +80,7 @@ class CategoryController extends Controller {
         try {
             $data = $this->validate( $this->request, [
                 'name'  => 'required|string|min:3|max:255',
-                'image' => ['sometimes', 'mimes:jpg,jepg,pdf,docs,png', 'max:2048'],
+                'image' => ['sometimes', 'mimes:jpg,jpeg,pdf,docs,png', 'max:2048'],
             ] );
             $data['upload'] = [
                 'file_name'    => null,
@@ -99,13 +99,13 @@ class CategoryController extends Controller {
                 'message'    => 'Category Create Succsfully.',
                 'alert-type' => 'success',
             );
-            return redirect()->back()->with( $notification );
+            return redirect()->route( 'admin.categories' )->with( $notification );
         } catch ( ValidationException $exception ) {
             $notification = array(
                 'message'    => 'Something went wrong.',
                 'alert-type' => 'warning',
             );
-            return redirect( 'category.index' );
+            return redirect()->back()->with( $notification );
 
         }
     }

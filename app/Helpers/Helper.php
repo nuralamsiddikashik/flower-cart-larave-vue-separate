@@ -1,8 +1,8 @@
 <?php
 namespace App\Helpers;
+use Exception;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
 class Helper {
@@ -27,13 +27,13 @@ class Helper {
 
             $path = app( 'filesystem' )->disk( $disk )->putFileAs( $folder, new File( $temp_upload_dir . $file_name ), $file_name, 'public' );
 
-        } catch ( \Exception $e ) {
-            Log::debug( 'Image upload error', $e->getMessage() );
+        } catch ( Exception $e ) {
+
             return [];
         }
 
         if ( !$path ) {
-            Log::debug( 'Image upload error, Check the folder permission issue' );
+
             return [];
         }
 

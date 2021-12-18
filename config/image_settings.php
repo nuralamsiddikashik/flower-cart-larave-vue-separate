@@ -3,7 +3,7 @@ return [
     'folder'              => 'category-image',
     'thumbnail'           => 'thumbnail',
     'allowed_image_types' => [
-        'jpg', 'png', 'jepg', 'svg',
+        'jpg', 'png', 'jpeg', 'svg',
     ],
 
     'new_upload_folder'   => 'category_image',
