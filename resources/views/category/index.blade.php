@@ -193,13 +193,22 @@
                                </tr>
                            </thead>
                            <tbody>
-                               @foreach ($categories as $item)
+                               @foreach ($categories as $key=> $item)
                                <tr>
+                                   <td>{{++$key}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->image}}</td>
                                    <td>
                                     <a href="{{route('admin.categories.edit',$item->id)}}">Edit</a>       
                                 </td> 
+                                <td>
+                                    <form action="{{ route('admin.categories.delete', [$item->id]) }}" class="mr-1"
+                                        method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </td>
                                </tr>
                                @endforeach
                                

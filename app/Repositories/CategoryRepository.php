@@ -34,4 +34,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
             'image' => $data['upload']['file_name'] ?? $category->image,
         ] );
     }
+    public function destroy( $id ) {
+        return $this->model->destroy( $id );
+    }
 }

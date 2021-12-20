@@ -166,6 +166,7 @@
                     <div class="card-body">
                         <form action="{{route('admin.categories.update', $category->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" class="form-control" value="{{$category->name}}">

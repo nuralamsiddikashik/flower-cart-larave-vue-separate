@@ -6,6 +6,8 @@ use App\Contracts\CategoryRepositoryInterface;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
@@ -107,6 +109,28 @@ class CategoryController extends Controller {
             );
             return redirect()->back()->with( $notification );
 
+        }
+    }
+
+    public function deleteCategory( $id, CategoryRepositoryInterface $categoryRepository ) {
+        $deleteImageCategory = $categoryRepository->find( $id );
+        if ( !$deleteImageCategory ) {
+            return response()->json( ['message' => 'Category Not found'] );
+        }
+        try {
+            $filePathDelete = $deleteImageCategory->image ? storage_path( 'app/public/' . config( 'image_settings.folder' ) ) . '/' . $deleteImageCategory->image : null;
+
+            $deleteCategory = $categoryRepository->destroy( $id );
+            if ( $deleteCategory && file_exists( $filePathDelete ) ) {
+                unlink( $filePathDelete );
+            }
+            $notification = array(
+                'message'    => 'Category Delete Succsfully.',
+                'alert-type' => 'warning',
+            );
+            return redirect()->back()->with( $notification );
+        } catch ( QueryException | Exception $exception ) {
+            return $exception->getMessage();
         }
     }
 
