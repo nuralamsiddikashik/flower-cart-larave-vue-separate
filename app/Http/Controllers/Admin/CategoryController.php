@@ -27,7 +27,7 @@ class CategoryController extends Controller {
             return $category;
         } );
 
-        return view( 'category.index', $data );
+        return view( 'admin.category.index', $data );
     }
 
     public function store( CategoryRepositoryInterface $categoryRepository ) {
@@ -70,7 +70,7 @@ class CategoryController extends Controller {
 
         $data['category']->image = Category::getFileUrl( $data['category']->image );
 
-        return view( 'category.edit', $data );
+        return view( 'admin.category.edit', $data );
     }
 
     public function update( $id, CategoryRepositoryInterface $categoryRepository ) {

@@ -188,7 +188,8 @@
                                    <th>SL</th>
                                    <th>Name</th>
                                    <th>Image</th>
-                                   <th>Action</th>
+                                   <th>Edit</th>
+                                   <th>Delete</th>
                                    
                                </tr>
                            </thead>
@@ -197,9 +198,9 @@
                                <tr>
                                    <td>{{++$key}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->image}}</td>
+                                <td><img src="{{asset($item->image)}}" alt=""></td>
                                    <td>
-                                    <a href="{{route('admin.categories.edit',$item->id)}}">Edit</a>       
+                                    <a class="btn btn-sm btn-warning" href="{{route('admin.categories.edit',$item->id)}}">Edit</a>       
                                 </td> 
                                 <td>
                                     <form action="{{ route('admin.categories.delete', [$item->id]) }}" class="mr-1"
