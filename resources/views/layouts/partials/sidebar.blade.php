@@ -30,7 +30,7 @@
                 <!-- Sub menu -->
                 <div id="sub_menu_1" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <ul class="side-sub-menu p-0">
-                        <li class="side-sub-menu-item px-3"><a href="" class="w-100 pl-4">Add Product</a></li>
+                        <li class="side-sub-menu-item px-3"><a href="{{route('admin.product.create')}}" class="w-100 pl-4">Add Product</a></li>
                         <li class="side-sub-menu-item px-3"><a href="" class="w-100 pl-4">All Products</a></li>
 
                     </ul>

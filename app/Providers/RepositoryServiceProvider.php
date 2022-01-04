@@ -5,8 +5,8 @@ namespace App\Providers;
 use App\Contracts\CategoryRepositoryInterface;
 use App\Contracts\ProductRepositoryInterface;
 use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\ServiceProvider;
-use ProductRepository;
 
 class RepositoryServiceProvider extends ServiceProvider {
     public $bindings = [
