@@ -14,4 +14,8 @@ class Product extends Model {
     public function category() {
         return $this->belongsTo( Category::class );
     }
+
+    public static function getFileProductImage( $value ) {
+        return config( 'image_settings.base_url' ) . config( 'image_settings.product_image_folder' ) . '/' . $value;
+    }
 }

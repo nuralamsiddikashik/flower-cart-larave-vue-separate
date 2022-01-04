@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration {
             $table->foreignId( 'category_id' );
             $table->string( 'product_title' );
             $table->string( 'product_slug' );
-            $table->string( 'product_sku' )->nullable();
+            $table->string( 'product_sku' )->unique()->index();
             $table->string( 'product_description' )->nullable();
             $table->string( 'product_image' )->nullable();
             $table->decimal( 'cost_price', 8, 2 );
