@@ -211,9 +211,10 @@
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control">
-                            <option value="1">Active</option>
-                            <option value="2">In Active</option>
-                            <option value="3">Pending</option>
+                            <option value="1" {{ $product->status == '1' ? 'selected' : '' }}>Active</option>
+                            <option value="2" {{ $product->status == '2' ? 'selected' : '' }}>In Active</option>
+                            <option value="3" {{ $product->status == '3' ? 'selected' : '' }}>Pending</option>
+                           
                         </select>
                     </div>
                     <div class="form-group">
