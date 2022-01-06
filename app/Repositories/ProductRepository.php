@@ -13,7 +13,7 @@ class ProductRepository implements ProductRepositoryInterface {
     }
 
     public function get() {
-        $products = $this->model->select( 'id', 'product_title', 'product_sku', 'cost_price', 'selling_price', 'quantity' );
+        $products = $this->model->select( 'id', 'product_title', 'product_sku', 'cost_price', 'selling_price', 'quantity', 'product_image' );
         return $products->get();
     }
     public function find( $id ) {
