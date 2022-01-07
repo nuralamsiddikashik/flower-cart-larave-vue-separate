@@ -21,7 +21,10 @@ class ProductController extends Controller {
     }
 
     public function index( ProductRepositoryInterface $productRepository ) {
-        $data['products'] = $productRepository->get();
+        $data['products'] = $productRepository->get()->transform( function ( $product ) {
+            $product->product_image = Product::getFileProductImage( $product->product_image );
+            return $product;
+        } );
 
         return view( 'admin.product.index', $data );
     }

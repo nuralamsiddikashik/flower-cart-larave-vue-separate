@@ -171,6 +171,7 @@
                                     <th>Product Quantity</th>
                                     <th>Product Cost Price</th>
                                     <th>Product Selling Price</th>
+                                    <th>Product Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -183,6 +184,7 @@
                                     <td>{{$product->quantity}}</td>
                                     <td>{{$product->cost_price}}</td>
                                     <td>{{$product->selling_price}}</td>
+                                    <td><img src="{{asset($product->product_image)}}" alt=""></td>
                                     <td><a href="{{route('admin.product.edit',[$product->id])}}">Edit</a></td>
                                 </tr>
                                 @endforeach

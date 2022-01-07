@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Contracts\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {
@@ -17,7 +18,10 @@ class HomeController extends Controller {
     }
 
     public function index() {
-        $data['products'] = $this->productRepository->get();
+        $data['products'] = $this->productRepository->get()->transform( function ( $product ) {
+            $product->product_image = Product::getFileProductImage( $product->product_image );
+            return $product;
+        } );
 
         return view( 'frontend.home.index', $data );
     }
