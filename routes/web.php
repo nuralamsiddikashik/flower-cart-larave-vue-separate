@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get( '/', [HomeController::class, 'index'] )->name( 'home' );
 
+
 Route::group( ['middleware' => 'auth'], function () {
     Route::get( '/admin/dashboard', [AdminController::class, 'index'] )->name( 'admin.dashboard' );
     Route::get( '/categories', [CategoryController::class, 'index'] )->name( 'admin.categories' );
