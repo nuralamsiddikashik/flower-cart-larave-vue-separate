@@ -9,9 +9,9 @@
 
     <!--favicon and touch icon-->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <link rel="apple-touch-icon" href="assets/img/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/favicon-114x114.png">
+    <link rel="apple-touch-icon" href="{{asset('/home/assets/img/favicon.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('/home/assets/img/favicon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('/home/assets/img/favicon-114x114.png')}}">
 
     <!--site title-->
     <title>Simple Shop</title>
@@ -29,7 +29,7 @@
     <!--<link rel="stylesheet" href="assets/css/woocommerce-prev.css">-->
 
     <link rel="stylesheet" href="{{asset('home/assets/css/woocommerce-layouts.css')}}">
-    <link rel='stylesheet' id='woocommerce-smallscreen-css'  href='assets/css/woocommerce-small-screen.css' type='text/css' media='only screen and (max-width: 768px)' />
+    <link rel='stylesheet' id='woocommerce-smallscreen-css'  href='{{asset('/home/assets/css/woocommerce-small-screen.css')}}' type='text/css' media='only screen and (max-width: 768px)' />
     <link rel="stylesheet" href="{{asset('home/assets/css/woocommerce.css')}}">
 
     <!--custom css-->
@@ -46,7 +46,7 @@
                 <nav class="navbar navbar-expand-lg mainmenu">
                     <!--logo-->
                     <a class="navbar-brand mr-5 text-dark float-left" href="index.html">
-                        <img class="" src="assets/img/logo.png" srcset="assets/img/logo@2x.png 2x" alt=""/>
+                        <img class="" src="{{asset('/home/assets/img/logo.png')}}" srcset="assets/img/logo@2x.png 2x" alt=""/>
                     </a>
                     <!--logo-->
 
@@ -123,11 +123,11 @@
                                 <ul class="dropdown-menu dropdown-menu-right widget_shopping_cart_content woocommerce-mini-cart cart_list product_list_widget ">
                                     <li class="woocommerce-mini-cart-item mini_cart_item">
                                         <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" data-product_id="180" data-cart_item_key="045117b0e0a11a242b9765e79cbf113f" data-product_sku="9015-DF-1">×</a>													<a class="mini_cart_item-image" href="https://stockie.colabr.io/demo1/shop/gosta-leather-chair/">
-                                        <img src="assets/img/p1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">							</a>
+                                        <img src="{{asset('/home/assets/img/p1.jpg')}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">							</a>
                                         <div class="mini_cart_item-desc">
                                             <a class="font-titles" href="#">Trendy Cloth</a>
                                             <span class="woo-c_product_category">
-                                                    <a href="assets/img/p1.jpg" rel="tag">Cloth</a>
+                                                    <a href="{{asset('/home/assets/img/p1.jpg')}}" rel="tag">Cloth</a>
                                                 </span>
 
                                             <span class="quantity">1 × <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">56.00<span class="woocommerce-Price-currencySymbol">$</span></span></span></span>
@@ -135,7 +135,7 @@
                                     </li>
                                     <li class="woocommerce-mini-cart-item mini_cart_item">
                                         <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" data-product_id="18907" data-cart_item_key="91726a6e8c9faa2bb5f26d442a59c203" data-product_sku="9015-DF-2">×</a>													<a class="mini_cart_item-image" href="https://stockie.colabr.io/demo1/shop/stoppade-plastic-chair/">
-                                        <img src="assets/img/p2.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
+                                        <img src="{{asset('/home/assets/img/p2.jpg')}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
                                     </a>
                                         <div class="mini_cart_item-desc">
                                             <a class="font-titles" href="#">Warm Sweater</a>
@@ -197,7 +197,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4 mb-md-0 mb-4">
-                <img class="footer-logo" src="assets/img/logo.png" srcset="assets/img/logo@2x.png 2x" alt="">
+                <img class="footer-logo" src="{{asset('/home/assets/img/logo.png')}}" srcset="assets/img/logo@2x.png 2x" alt="">
             </div>
             <div class="col-md-4  mb-md-0 mb-4">
                 <div class="social-links">

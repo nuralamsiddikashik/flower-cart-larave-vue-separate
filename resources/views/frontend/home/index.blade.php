@@ -49,12 +49,12 @@
             </div>
         </div>
         <div class="flickr-list">
-            <a href="#" style="background-image: url('assets/img/s1.jpg')"></a>
-            <a href="#" style="background-image: url('assets/img/sb.jpg')"></a>
-            <a href="#" style="background-image: url('assets/img/s2.jpg')"></a>
-            <a href="#" style="background-image: url('assets/img/s3.jpg')"></a>
-            <a href="#" style="background-image: url('assets/img/s4.jpg')"></a>
-            <a href="#" style="background-image: url('assets/img/s5.jpg')"></a>
+            <a href="#" style="background-image: url('{{asset('/home/assets/img/s1.jpg')}}')"></a>
+            <a href="#" style="background-image: url('{{asset('/home/assets/img/sb.jpg')}}')"></a>
+            <a href="#" style="background-image: url('{{asset('/home/assets/img/s2.jpg')}}')"></a>
+            <a href="#" style="background-image: url('{{asset('/home/assets/img/s3.jpg')}}')"></a>
+            <a href="#" style="background-image: url('{{asset('/home/assets/img/s4.jpg')}}')"></a>
+            <a href="#" style="background-image: url('{{asset('/home/assets/img/s5.jpg')}}')"></a>
         </div>
     </section>
     <!-- flickr section end-->
