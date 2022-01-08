@@ -6,7 +6,7 @@
     <meta name="keywords" content=" ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="author" content="Mosaddek">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!--favicon and touch icon-->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="apple-touch-icon" href="{{asset('/home/assets/img/favicon.png')}}">
@@ -34,12 +34,12 @@
 
     <!--custom css-->
     <link href="{{asset('home/assets/css/main.css')}}" rel="stylesheet">
-
+    @stack('header-js')
 </head>
 <body class="archive  woocommerce">
 
 <<!--header start-->
-<header class="app-header">
+<header class="app-header" id="cart-header">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -222,6 +222,16 @@
 
 <!--init scripts-->
 <script src="{{asset('home/assets/js/scripts.js')}}"></script>
-
+<script src="{{asset('qbadminui/js/vue.js')}}"></script>
+<script src="{{asset('qbadminui/js/axios.min.js')}}"></script>
+<script>
+    let headerCart = new Vue({
+        el: '#cart-header', 
+        data: {
+          products:'Hello Header Page'
+        }
+    })
+</script>
+@stack('footer-js')
 </body>
 </html>

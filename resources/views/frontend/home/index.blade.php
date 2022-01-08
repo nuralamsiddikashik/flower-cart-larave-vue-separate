@@ -1,6 +1,6 @@
 @extends('frontend')
 @section('content')
-<main class="site-main">
+<main class="site-main" id="homepage">
   
     @include('frontend.home.category.category')
     @include('frontend.home.product.product')
@@ -61,3 +61,13 @@
 </main>
 
 @endsection
+@push('footer-js')
+<script>
+    let homePage = new Vue({
+        el: '#homepage', 
+        data: {
+          products:'Hello Page'
+        }
+    })
+</script>
+@endpush
