@@ -25,4 +25,10 @@ class HomeController extends Controller {
 
         return view( 'frontend.home.index', $data );
     }
+
+    public function single_product( $product_slug, ProductRepositoryInterface $productRepository ) {
+        $product = $this->productRepository->findBySlug( $product_slug );
+
+        return view( 'frontend.home.single-product.single', compact( 'product' ) );
+    }
 }

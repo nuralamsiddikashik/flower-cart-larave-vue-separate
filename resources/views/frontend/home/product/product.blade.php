@@ -16,7 +16,7 @@
                     @foreach ($products as $product_item)
                         <li class="product">
                             <div class="product-wrap">
-                                <a href="#" class="">
+                                <a href="{{route('single-product', $product_item->product_slug)}}" class="">
                                     <img src="{{asset($product_item->product_image)}}" alt="">
                                 </a>
                                 <a href="#" class="button product_type_simple add_to_cart_button ajax_add_to_cart">
