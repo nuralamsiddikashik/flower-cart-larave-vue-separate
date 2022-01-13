@@ -45,7 +45,7 @@
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg mainmenu">
                     <!--logo-->
-                    <a class="navbar-brand mr-5 text-dark float-left" href="index.html">
+                    <a class="navbar-brand mr-5 text-dark float-left" href="{{route('home')}}">
                         <img class="" src="{{asset('/home/assets/img/logo.png')}}" srcset="assets/img/logo@2x.png 2x" alt=""/>
                     </a>
                     <!--logo-->
@@ -79,7 +79,7 @@
                     <!--nav link-->
                     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                         <ul id="menu" class="navbar-nav ml-auto">
-                            <li class=""><a href="index.html" class="" >Home</a></li>
+                            <li class=""><a href="{{route('home')}}" class="" >Home</a></li>
                             <li class=""><a href="product-list-filter.html" class="" >Shop List</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>

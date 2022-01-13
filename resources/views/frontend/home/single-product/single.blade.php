@@ -1,7 +1,7 @@
 @extends('frontend')
 @section('content')
   
-    <main class="site-main">
+    <main class="site-main" id="single-page">
         <!--shop category start-->
         <section class="space-3">
             <div class="container sm-center">
@@ -11,24 +11,15 @@
     
                             <span class="onsale">Sale!</span>
                             <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4">
-                                <a href="#" class="woocommerce-product-gallery__trigger">
-                                    <img draggable="false" class="emoji" alt="🔍" src="https://s.w.org/images/core/emoji/11/svg/1f50d.svg"></a>
-                                <figure class="woocommerce-product-gallery__wrapper">
-                                    <div data-thumb="assets/img/pc1.jpg" class="woocommerce-product-gallery__image">
-                                        <a href="assets/img/pc1.jpg">
-                                            <img width="600" height="600" src="assets/img/pc1.jpg" class="wp-post-image" alt="" title="beanie-2.jpg" data-caption="" data-src="assets/img/pc1.jpg" data-large_image="assets/img/pc1.jpg" data-large_image_width="801" data-large_image_height="801" srcset="assets/img/pc1.jpg 600w, assets/img/pc1.jpg 150w, assets/img/pc1.jpg 300w, assets/img/pc1.jpg 768w, assets/img/pc1.jpg 100w, assets/img/pc1.jpg 801w" sizes="(max-width: 600px) 100vw, 600px">
-                                        </a>
-                                        <!--<img role="presentation" alt="" src="assets/img/pc1.jpg" class="zoomImg" style="position: absolute; top: -53.5876px; left: -76.8026px; opacity: 0; width: 801px; height: 801px; border: none; max-width: none; max-height: none;">-->
-                                    </div>
-                                </figure>
+                                <img src="{{asset($product->product_image)}}" alt="">
                             </div>
     
                             <div class="summary entry-summary">
                                 <h1 class="product_title entry-title">{{$product->product_title}}</h1>
                                 <p class="price"><del>
                                         <span class="woocommerce-Price-amount amount">
-                                            <span class="woocommerce-Price-currencySymbol">৳&nbsp;</span>20.00</span></del>
-                                    <ins><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">৳&nbsp;</span>18.00</span></ins>
+                                            <span class="woocommerce-Price-currencySymbol">৳&nbsp;</span>{{$product->cost_price}}</span></del>
+                                    <ins><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">৳&nbsp;</span>{{$product->selling_price}}</span></ins>
                                 </p>
                                 <div class="woocommerce-product-details__short-description">
                                     <p>This is a simple product.</p>
@@ -43,8 +34,8 @@
                                 </form>
     
                                 <div class="product_meta">
-                                    <span class="sku_wrapper">SKU: <span class="sku">woo-beanie</span></span>
-                                    <span class="posted_in">Category: <a href="#" rel="tag">Accessories</a></span>
+                                    <span class="sku_wrapper">SKU: <span class="sku">{{$product->product_sku}}</span></span>
+                                    <span class="posted_in">Category: <a href="#" rel="tag"></a></span>
                                 </div>
                             </div>
     
@@ -199,3 +190,14 @@
     </main>
 
 @endsection
+
+@push('footer-js')
+<script>
+    let singlePage = new Vue({
+        el: '#single-page', 
+        data: {
+          products:'Hello Single Page'
+        }
+    })
+</script>
+@endpush
