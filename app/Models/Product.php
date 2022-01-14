@@ -18,4 +18,5 @@ class Product extends Model {
     public static function getFileProductImage( $value ) {
         return config( 'image_settings.base_url' ) . config( 'image_settings.product_image_folder' ) . '/' . $value;
     }
+
 }

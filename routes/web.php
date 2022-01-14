@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get( '/', [HomeController::class, 'index'] )->name( 'home' );
+Route::get( 'product/{product_slug}', [HomeController::class, 'single_product'] )->name( 'single-product' );
 
 
 Route::group( ['middleware' => 'auth'], function () {

@@ -13,7 +13,7 @@ class ProductRepository implements ProductRepositoryInterface {
     }
 
     public function get() {
-        $products = $this->model->select( 'id', 'product_title', 'product_sku', 'cost_price', 'selling_price', 'quantity', 'product_image' );
+        $products = $this->model->select( 'id', 'product_title', 'product_slug', 'product_sku', 'cost_price', 'selling_price', 'quantity', 'product_image' );
         return $products->get();
     }
     public function find( $id ) {
@@ -51,6 +51,10 @@ class ProductRepository implements ProductRepositoryInterface {
             'status'              => $data['status'],
             'published_by'        => $data['published_by'],
         ] );
+    }
+
+    public function findBySlug( $product_slug ) {
+        return $this->model->where( 'product_slug', $product_slug )->first();
     }
 
     public function destroy( $id ) {}

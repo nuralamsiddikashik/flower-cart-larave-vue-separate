@@ -36,7 +36,7 @@
 
     <!--custom css-->
     <link href="{{asset('home/assets/css/main.css')}}" rel="stylesheet">
-
+    @stack('header-js')
 </head>
 <body class="archive  woocommerce">
 
@@ -47,7 +47,7 @@
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg mainmenu">
                     <!--logo-->
-                    <a class="navbar-brand mr-5 text-dark float-left" href="index.html">
+                    <a class="navbar-brand mr-5 text-dark float-left" href="{{route('home')}}">
                         <img class="" src="{{asset('/home/assets/img/logo.png')}}" srcset="assets/img/logo@2x.png 2x" alt=""/>
                     </a>
                     <!--logo-->
@@ -81,7 +81,7 @@
                     <!--nav link-->
                     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                         <ul id="menu" class="navbar-nav ml-auto">
-                            <li class=""><a href="index.html" class="" >Home</a></li>
+                            <li class=""><a href="{{route('home')}}" class="" >Home</a></li>
                             <li class=""><a href="product-list-filter.html" class="" >Shop List</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -175,24 +175,6 @@
 </header>
 <!--header end-->
 
-<!--hero section start-->
-<div id="home">
-    <section class="hero js_full_height base-gradient- " style="background-image: url('{{asset('/home/assets/img/hero.jpg')}}');">
-        <div class="hero-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5" data-wow-duration="2s" data-wow-delay="1s">
-                        <h1 class="hero-title">Olive color winter jacket
-                            for ladies
-                        </h1>
-                        <a href="#" class="hero-link">Winter Fashion</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-
 @yield('content')
 
 <footer class="space-2 ">
@@ -228,16 +210,17 @@
 <script src="{{asset('qbadminui/js/axios.min.js')}}"></script>
 <script src="{{asset('qbadminui/js/toastr.min.js')}}"></script>
 
-<script>
-    let cart = new Vue({
-        el: '#cart-header',
-        data(){
-            return{
 
-            }
+
+<script>
+    let headerCart = new Vue({
+        el: '#cart-header',
+        data: {
+          products:'Hello Header Page'
         }
     })
 </script>
+@stack('footer-js')
 
 </body>
 </html>
