@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('cart', [CartController::class, 'currentCartList']);
-Route::post('cart', [CartController::class, 'addItemToCart']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

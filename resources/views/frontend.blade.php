@@ -215,8 +215,26 @@
 <script>
     let headerCart = new Vue({
         el: '#cart-header',
-        data: {
-          products:'Hello Header Page'
+        name: 'CartHeader',
+        data(){
+           return {
+               products: []
+           }
+        } ,
+        methods: {
+            getCartProducts(){
+                let cartProductUrl = '/api/v1/cart';
+                axios.get(cartProductUrl).then(response => {
+                    if(response.status === 200){
+                        console.log(response.data);
+                    }
+                })
+            }
+        },
+        mounted(){
+            window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            this.getCartProducts();
+            console.log('called');
         }
     })
 </script>

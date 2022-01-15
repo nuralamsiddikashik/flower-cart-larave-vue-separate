@@ -20,7 +20,7 @@
 
 @section('content')
 <main class="site-main" id="homepage">
-  
+
     @include('frontend.home.category.category')
     @include('frontend.home.product.product')
     @include('frontend.home.promo.promo')
@@ -83,9 +83,25 @@
 @push('footer-js')
 <script>
     let homePage = new Vue({
-        el: '#homepage', 
+        el: '#homepage',
+        name: 'HomePage',
         data: {
           products:'Hello Page'
+        },
+        methods: {
+            addItemToCart(product_id){
+                let addItemUrl = '/api/v1/cart';
+                axios.post(addItemUrl, {
+                    product_id: product_id
+                }).then(response => {
+                    if(response.status === 201){
+                        console.log('item added');
+                    }
+                })
+            }
+        },
+        mounted(){
+            window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         }
     })
 </script>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,11 @@ Route::get( '/', [HomeController::class, 'index'] )->name( 'home' );
 Route::get( 'product/{product_slug}', [HomeController::class, 'single_product'] )->name( 'single-product' );
 
 
+Route::group(['prefix' => 'api/v1/'], function (){
+    Route::get('cart', [CartController::class, 'currentCartList']);
+    Route::post('cart', [CartController::class, 'addItemToCart']);
+});
+
 Route::group( ['middleware' => 'auth'], function () {
     Route::get( '/admin/dashboard', [AdminController::class, 'index'] )->name( 'admin.dashboard' );
     Route::get( '/categories', [CategoryController::class, 'index'] )->name( 'admin.categories' );
@@ -40,3 +46,6 @@ Route::group( ['middleware' => 'auth'], function () {
     Route::put( 'products/{id}', [ProductController::class, 'update'] )->name( 'admin.product.update' );
 
 } );
+
+
+
