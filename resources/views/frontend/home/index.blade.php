@@ -96,6 +96,7 @@
                 }).then(response => {
                     if(response.status === 201){
                         console.log('item added');
+                        headerCart.getCartProducts();
                     }
                 })
             }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\CartUser;
 use App\Models\Product;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -12,10 +13,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
+    /**
+     *
+     */
     public function __construct()
     {
 
     }
+
+    /**
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function currentCartList(Request $request)
     {
         if ($request->session()->has('cartItem')){
@@ -23,10 +32,19 @@ class CartController extends Controller
         }else{
             $cart_instance_id = $request->session()->put([ 'cartItem' => uniqid('cart.', true)]);
         }
-        $cartItemProducts = CartUser::where('cart_session_id', $cart_instance_id)->get();
+        $cartItemProducts = CartUser::where('cart_session_id', $cart_instance_id)
+            ->with(['product:id,product_image,product_title,product_sku,product_slug'])
+            ->get()->transform(function ($item){
+                $item->product->product_image = config('image_settings.base_url') . config('image_settings.product_image_folder') . '/' . $item->product->product_image;
+                return $item;
+            });
         return response()->json($cartItemProducts, Response::HTTP_OK);
     }
 
+    /**
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addItemToCart(Request $request)
     {
         // create or fetch a cart session id
@@ -73,6 +91,32 @@ class CartController extends Controller
             ], Response::HTTP_CONFLICT);
         }
 
+
+
+    }
+
+    /**
+     * @param $product_id
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeItemToCart($product_id, Request $request)
+    {
+        if (!$request->session()->has('cartItem')){
+            return response()->json(['message' => 'No item found!'], Response::HTTP_NOT_FOUND);
+        }
+        $cart_instance_id = $request->session()->get('cartItem');
+        $cart_item = CartUser::where('cart_session_id', $cart_instance_id)->where('product_id', $product_id)->first();
+        if (!$cart_item) {
+            return response()->json(['message' => 'No item found!'], Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            CartUser::destroy($cart_item->id);
+            return response()->json(['message' => 'Item removed'], Response::HTTP_OK);
+        }catch (QueryException|\Exception $e){
+            return response()->json(['message' => 'Failed to remove!'], Response::HTTP_CONFLICT);
+        }
 
 
     }

@@ -19,4 +19,9 @@ class Product extends Model {
         return config( 'image_settings.base_url' ) . config( 'image_settings.product_image_folder' ) . '/' . $value;
     }
 
+    public function cartItems()
+    {
+        return $this->hasMany(CartUser::class);
+    }
+
 }

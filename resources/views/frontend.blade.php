@@ -123,32 +123,20 @@
                             <li class="dropdown mini-cart">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-basket"></i><span class="cart-quantity-highlighter">2</span></a>
                                 <ul class="dropdown-menu dropdown-menu-right widget_shopping_cart_content woocommerce-mini-cart cart_list product_list_widget ">
-                                    <li class="woocommerce-mini-cart-item mini_cart_item">
-                                        <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" data-product_id="180" data-cart_item_key="045117b0e0a11a242b9765e79cbf113f" data-product_sku="9015-DF-1">×</a>													<a class="mini_cart_item-image" href="https://stockie.colabr.io/demo1/shop/gosta-leather-chair/">
-                                        <img src="{{asset('/home/assets/img/p1.jpg')}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">							</a>
+                                    <li class="woocommerce-mini-cart-item mini_cart_item" v-for="(product, index) in products" :key="index">
+                                        <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" @click="removeCartProduct(product.product_id)">×</a>													<a class="mini_cart_item-image" href="#">
+                                        <img :src="product.product.product_image" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">							</a>
                                         <div class="mini_cart_item-desc">
-                                            <a class="font-titles" href="#">Trendy Cloth</a>
-                                            <span class="woo-c_product_category">
-                                                    <a href="{{asset('/home/assets/img/p1.jpg')}}" rel="tag">Cloth</a>
-                                                </span>
+                                            <a class="font-titles" href="#">@{{ product.product.product_title }}</a>
 
-                                            <span class="quantity">1 × <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">56.00<span class="woocommerce-Price-currencySymbol">$</span></span></span></span>
+
+                                            <span class="quantity">1 × <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">@{{ product.price }}<span class="woocommerce-Price-currencySymbol">$</span></span></span></span>
                                         </div>
                                     </li>
-                                    <li class="woocommerce-mini-cart-item mini_cart_item">
-                                        <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" data-product_id="18907" data-cart_item_key="91726a6e8c9faa2bb5f26d442a59c203" data-product_sku="9015-DF-2">×</a>													<a class="mini_cart_item-image" href="https://stockie.colabr.io/demo1/shop/stoppade-plastic-chair/">
-                                        <img src="{{asset('/home/assets/img/p2.jpg')}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
-                                    </a>
-                                        <div class="mini_cart_item-desc">
-                                            <a class="font-titles" href="#">Warm Sweater</a>
-                                            <span class="woo-c_product_category">
-                                                    <a href="#" rel="tag">Stools</a></span>
-                                            <span class="quantity">1 × <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">97.00<span class="woocommerce-Price-currencySymbol">$</span></span></span></span>
-                                        </div>
-                                    </li>
+
                                     <li class="woocommerce-mini-cart-item mini_cart_item">
                                         <div class="woocomerce-mini-cart__container">
-                                            <p class="woocommerce-mini-cart__total total"><strong>Subtotal:</strong> <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">153.00<span class="woocommerce-Price-currencySymbol">$</span></span></span></p>
+                                            <p class="woocommerce-mini-cart__total total"><strong>Subtotal:</strong> <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">@{{ products.reduce((total, item) => total + parseFloat(item.price), 0) }}<span class="woocommerce-Price-currencySymbol">$</span></span></span></p>
                                             <p class="woocommerce-mini-cart__buttons buttons">
                                                 <a href="#" class="button wc-forward">View cart</a>
                                                 <a href="#" class="button checkout wc-forward">Checkout</a>
@@ -221,12 +209,23 @@
                products: []
            }
         } ,
+
         methods: {
             getCartProducts(){
                 let cartProductUrl = '/api/v1/cart';
                 axios.get(cartProductUrl).then(response => {
                     if(response.status === 200){
                         console.log(response.data);
+                        this.products = response.data;
+                    }
+                })
+            },
+            removeCartProduct(product_id){
+                let productRemoveUrl = '/api/v1/cart/' + product_id;
+                axios.delete(productRemoveUrl).then(response => {
+                    if(response.status === 200){
+                        console.log(response.data);
+                        this.getCartProducts();
                     }
                 })
             }

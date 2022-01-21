@@ -29,6 +29,7 @@ Route::get( 'product/{product_slug}', [HomeController::class, 'single_product'] 
 Route::group(['prefix' => 'api/v1/'], function (){
     Route::get('cart', [CartController::class, 'currentCartList']);
     Route::post('cart', [CartController::class, 'addItemToCart']);
+    Route::delete('cart/{product_id}', [CartController::class, 'removeItemToCart']);
 });
 
 Route::group( ['middleware' => 'auth'], function () {
