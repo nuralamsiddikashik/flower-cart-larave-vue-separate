@@ -30,10 +30,18 @@ class HomeController extends Controller {
         $product = $this->productRepository->findBySlug( $product_slug );
 
         // $data['product'] = $this->productRepository->findBySlug( $product_slug )->transform( function ( $product ) {
-        //     $product->product_image = Product::singleProductImage( $product->product_image );
+        //     $product->product_image = Product::getFileProductImage( $product->product_image );
         //     return $product;
         // } );
 
         return view( 'frontend.home.single-product.single', compact( 'product' ) );
+    }
+
+    public function cartPage() {
+        return view( 'frontend.home.cart.cart' );
+    }
+
+    public function proceed_to_checkout() {
+        return view( 'frontend.home.checkout.checkout' );
     }
 }

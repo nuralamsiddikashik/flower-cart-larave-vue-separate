@@ -11,7 +11,7 @@
     
                             <span class="onsale">Sale!</span>
                             <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4">
-                                <img src="{{asset($product->product_image)}}" alt="">
+                                <img src="{{asset('/storage/product-image' . '/' .$product->product_image)}}" alt="">
                             </div>
     
                             <div class="summary entry-summary">

@@ -150,8 +150,8 @@
                                         <div class="woocomerce-mini-cart__container">
                                             <p class="woocommerce-mini-cart__total total"><strong>Subtotal:</strong> <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">153.00<span class="woocommerce-Price-currencySymbol">$</span></span></span></p>
                                             <p class="woocommerce-mini-cart__buttons buttons">
-                                                <a href="#" class="button wc-forward">View cart</a>
-                                                <a href="#" class="button checkout wc-forward">Checkout</a>
+                                                <a href="{{route('cart-product')}}" class="button wc-forward">View cart</a>
+                                                <a href="{{route('cart-checkout')}}" class="button checkout wc-forward">Checkout</a>
                                             </p>
                                         </div>
                                     </li>

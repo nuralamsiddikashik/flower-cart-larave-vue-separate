@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get( '/', [HomeController::class, 'index'] )->name( 'home' );
 Route::get( 'product/{product_slug}', [HomeController::class, 'single_product'] )->name( 'single-product' );
+Route::get( 'cart', [HomeController::class, 'cartPage'] )->name( 'cart-product' );
+Route::get( 'checkout', [HomeController::class, 'proceed_to_checkout'] )->name( 'cart-checkout' );
 
 
 Route::group( ['middleware' => 'auth'], function () {
