@@ -7,6 +7,7 @@
             <div class="col-md-12">
                 <h2 class="font-weight-bold">Shopping Cart</h2>
                 <h2 class="font-weight-bold">Shopping Cart</h2>
+                <h2 class="font-weight-bold">Shopping Cart</h2>
                 <nav class="woocommerce-breadcrumb">
                     <a href="#">Home</a>
                     <span class="breadcrumb-separator"> / </span>Cart
