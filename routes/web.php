@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,10 @@ Route::get( 'product/{product_slug}', [HomeController::class, 'single_product'] 
 Route::get( 'cart', [HomeController::class, 'cartPage'] )->name( 'cart-product' );
 Route::get( 'checkout', [HomeController::class, 'proceed_to_checkout'] )->name( 'cart-checkout' );
 
+Route::group( ['prefix' => 'api/v1'], function () {
+    Route::get( 'cart', [CartController::class, 'currentCartList'] );
+    Route::post( 'cart', [CartController::class, 'addItemToCart'] );
+} );
 
 Route::group( ['middleware' => 'auth'], function () {
     Route::get( '/admin/dashboard', [AdminController::class, 'index'] )->name( 'admin.dashboard' );

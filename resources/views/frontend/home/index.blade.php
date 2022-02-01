@@ -75,7 +75,7 @@
             <a href="#" style="background-image: url('{{asset('/home/assets/img/s4.jpg')}}')"></a>
             <a href="#" style="background-image: url('{{asset('/home/assets/img/s5.jpg')}}')"></a>
         </div>
-    </section>
+    </section>  
     <!-- flickr section end-->
 </main>
 
@@ -84,8 +84,24 @@
 <script>
     let homePage = new Vue({
         el: '#homepage', 
+        name: 'HomePage', 
         data: {
           products:'Hello Page'
+        },
+        methods:{
+            addItemToCart(product_id){
+                let addToCartUrl = '/api/v1/cart'; 
+                axios.post(addToCartUrl, {
+                    product_id: product_id
+                }).then(response => {
+                    if(response.status === 201){
+                        console.log('item added');
+                    }
+                })
+            }
+        }, 
+        mounted(){
+            window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         }
     })
 </script>

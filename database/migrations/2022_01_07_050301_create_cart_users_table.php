@@ -4,23 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartUsersTable extends Migration
-{
+class CreateCartUsersTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('cart_users', function (Blueprint $table) {
+    public function up() {
+        Schema::create( 'cart_users', function ( Blueprint $table ) {
             $table->id();
-            $table->string('cart_session_id')->index();
-            $table->unsignedBigInteger('product_id')->index();
-            $table->decimal('quantity', 8, 2)->default(1);
-            $table->decimal('price', 14, 2);
+            $table->string( 'cart_session_id' )->index();
+            $table->unsignedBigInteger( 'product_id' )->index();
+            $table->decimal( 'quantity', 8, 2 )->default( 1 );
+            $table->decimal( 'price', 14, 2 );
             $table->timestamps();
-        });
+        } );
     }
 
     /**
@@ -28,8 +26,7 @@ class CreateCartUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('cart_users');
+    public function down() {
+        Schema::dropIfExists( 'cart_users' );
     }
 }

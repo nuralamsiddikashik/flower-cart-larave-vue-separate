@@ -20,7 +20,7 @@
                                     <img src="{{asset($product_item->product_image)}}" alt="">
                                 </a>
                                 <a href="#" class="button product_type_simple add_to_cart_button ajax_add_to_cart">
-                                    <i class="fa fa-shopping-basket"></i>
+                                    <i class="fa fa-shopping-basket" @click.prevent="addItemToCart('{{$product_item->id}}')"></i>
                                 </a>
                             </div>
                             <div class="woocommerce-product-title-wrap">
