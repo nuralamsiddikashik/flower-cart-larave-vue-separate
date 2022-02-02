@@ -16,7 +16,14 @@ class CartController extends Controller {
     }
     public function currentCartList( Request $request ) {
 
-        return response()->json( [], Response::HTTP_OK );
+        if ( $request->session()->has( 'cartItem' ) ) {
+            $cart_instance_id = $request->session()->get( 'cartItem' );
+        } else {
+            $cart_instance_id = $request->session()->put( ['cartItem' => uniqid( 'cart.', true )] );
+        }
+
+        $cartItemProducts = CartUser::where( 'cart_session_id', $cart_instance_id )->get();
+        return response()->json( $cartItemProducts, Response::HTTP_OK );
 
     }
 
@@ -34,14 +41,27 @@ class CartController extends Controller {
             $validate_data = $this->validate( $request, [
                 'product_id' => 'required|integer|exists:products,id',
             ] );
-            $product = Product::where( 'id', $validate_data['product_id'] )->first( 'selling_price' );
-            CartUser::create( [
-                'cart_session_id' => $cart_instance_id,
-                'product_id'      => $validate_data['product_id'],
-                'quantity'        => 1,
-                'price'           => $product->selling_price,
+            $product                = Product::where( 'id', $validate_data['product_id'] )->first( 'selling_price' );
+            $exit_cart_user_product = CartUser::where( function ( $q ) use ( $cart_instance_id, $validate_data ) {
+                $q->where( 'cart_session_id', $cart_instance_id );
+                $q->where( 'product_id', $validate_data['product_id'] );
 
-            ] );
+            } )->first();
+
+            if ( !$exit_cart_user_product ) {
+                CartUser::create( [
+                    'cart_session_id' => $cart_instance_id,
+                    'product_id'      => $validate_data['product_id'],
+                    'quantity'        => 1,
+                    'price'           => $product->selling_price,
+
+                ] );
+            } else {
+                $exit_cart_user_product->update( [
+                    'quantity' => $exit_cart_user_product->quantity + 1,
+                ] );
+            }
+
             return response()->json( [
                 'message' => 'Cart Item Added',
             ], Response::HTTP_CREATED );
