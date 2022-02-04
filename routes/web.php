@@ -23,7 +23,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get( '/', [HomeController::class, 'index'] )->name( 'home' );
-Route::get( 'product/{product_slug}', [HomeController::class, 'single_product'] )->name( 'single-product' );
+Route::get( 'product/{product_slug}', [HomeController::class, 'singleProduct'] )->name( 'single-product' );
+
+Route::get( 'cart', [HomeController::class, 'cartPage'] )->name( 'cart-product' );
+Route::get( 'checkout', [HomeController::class, 'proceedToCheckout'] )->name( 'cart-checkout' );
 
 
 Route::group(['prefix' => 'api/v1/'], function (){

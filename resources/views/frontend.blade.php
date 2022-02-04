@@ -121,7 +121,7 @@
                             <li><a href="#" class="" ><i class="fa fa-user"></i></a></li>
                             <!--<li><a href="#" class="" ><i class="fa fa-shopping-basket"></i></a></li>-->
                             <li class="dropdown mini-cart">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-basket"></i><span class="cart-quantity-highlighter">2</span></a>
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-basket"></i><span class="cart-quantity-highlighter">@{{ products.length }}</span></a>
                                 <ul class="dropdown-menu dropdown-menu-right widget_shopping_cart_content woocommerce-mini-cart cart_list product_list_widget ">
                                     <li class="woocommerce-mini-cart-item mini_cart_item" v-for="(product, index) in products" :key="index">
                                         <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" @click="removeCartProduct(product.product_id)">×</a>													<a class="mini_cart_item-image" href="#">
@@ -135,12 +135,18 @@
                                     </li>
 
                                     <li class="woocommerce-mini-cart-item mini_cart_item">
-                                        <div class="woocomerce-mini-cart__container">
+                                        <div class="woocomerce-mini-cart__container" v-if="products.length > 0">
                                             <p class="woocommerce-mini-cart__total total"><strong>Subtotal:</strong> <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">@{{ products.reduce((total, item) => total + parseFloat(item.price), 0) }}<span class="woocommerce-Price-currencySymbol">$</span></span></span></p>
                                             <p class="woocommerce-mini-cart__buttons buttons">
-                                                <a href="#" class="button wc-forward">View cart</a>
-                                                <a href="#" class="button checkout wc-forward">Checkout</a>
+                                                <a href="{{route('cart-product')}}" class="button wc-forward">View cart</a>
+                                                <a href="{{route('cart-checkout')}}" class="button checkout wc-forward">Checkout</a>
                                             </p>
+                                        </div>
+                                        <div class="woocomerce-mini-cart__container" v-else>
+                                            <p class="woocommerce-mini-cart__total total">
+                                                <strong>You have no items in cart!</strong>
+                                            </p>
+
                                         </div>
                                     </li>
                                 </ul>

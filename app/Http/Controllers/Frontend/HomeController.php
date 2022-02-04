@@ -26,7 +26,7 @@ class HomeController extends Controller {
         return view( 'frontend.home.index', $data );
     }
 
-    public function single_product( $product_slug, ProductRepositoryInterface $productRepository ) {
+    public function singleProduct( $product_slug, ProductRepositoryInterface $productRepository ) {
         $product = $this->productRepository->findBySlug( $product_slug );
 
         // $data['product'] = $this->productRepository->findBySlug( $product_slug )->transform( function ( $product ) {
@@ -35,5 +35,13 @@ class HomeController extends Controller {
         // } );
 
         return view( 'frontend.home.single-product.single', compact( 'product' ) );
+    }
+
+    public function cartPage() {
+        return view( 'frontend.home.cart.cart' );
+    }
+
+    public function proceedToCheckout() {
+        return view( 'frontend.home.checkout.checkout' );
     }
 }
