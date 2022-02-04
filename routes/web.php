@@ -48,6 +48,8 @@ Route::group( ['middleware' => 'auth'], function () {
     Route::post( '/products', [ProductController::class, 'add_to_product'] )->name( 'admin.product.store' );
     Route::get( 'products/{id}', [ProductController::class, 'editProductItem'] )->name( 'admin.product.edit' );
     Route::put( 'products/{id}', [ProductController::class, 'update'] )->name( 'admin.product.update' );
+    Route::put( 'products/{id}', [ProductController::class, 'update'] )->name( 'admin.product.update' );
+    Route::put( 'products/{id}', [ProductController::class, 'update'] )->name( 'admin.product.update' );
 
 } );
 
