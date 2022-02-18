@@ -95,6 +95,33 @@ class CartController extends Controller
 
     }
 
+    public function updateItemToCart($product_id, Request $request)
+    {
+        if (!$request->session()->has('cartItem')){
+            return response()->json(['message' => 'No item found!'], Response::HTTP_NOT_FOUND);
+        }
+        $cart_instance_id = $request->session()->get('cartItem');
+        $cart_item = CartUser::where('cart_session_id', $cart_instance_id)->where('product_id', $product_id)->first();
+        if (!$cart_item) {
+            return response()->json(['message' => 'No item found!'], Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $validated_data = $this->validate($request, [
+               'quantity' => 'required|integer|min:1'
+            ]);
+            $cart_item->update([
+                'quantity' => $validated_data['quantity']
+            ]);
+            return response()->json(['message' => 'Item Updated'], Response::HTTP_OK);
+        }catch (ValidationException $e){
+            return response()->json($e->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        catch (QueryException|\Exception $e){
+            return response()->json(['message' => 'Failed to remove!'], Response::HTTP_CONFLICT);
+        }
+    }
+
     /**
      * @param $product_id
      * @param  Request  $request

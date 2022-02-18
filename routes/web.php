@@ -32,6 +32,7 @@ Route::get( 'checkout', [HomeController::class, 'proceedToCheckout'] )->name( 'c
 Route::group(['prefix' => 'api/v1/'], function (){
     Route::get('cart', [CartController::class, 'currentCartList']);
     Route::post('cart', [CartController::class, 'addItemToCart']);
+    Route::post('cart/{product_id}', [CartController::class, 'updateItemToCart']);
     Route::delete('cart/{product_id}', [CartController::class, 'removeItemToCart']);
 });
 

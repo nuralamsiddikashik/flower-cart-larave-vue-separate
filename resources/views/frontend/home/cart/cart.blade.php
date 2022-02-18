@@ -43,7 +43,7 @@
 
                                         <tr class="woocommerce-cart-form__cart-item cart_item" v-for="(product, index) in products" :key="index">
                                             <td class="product-remove">
-                                                <a href="#" class="remove" aria-label="Remove this item" data-product_id="30" data-product_sku="">×</a>						</td>
+                                                <span style="cursor: pointer" @click="removeCartItem(product.product_id)">×</span>						</td>
                                             <td class="product-thumbnail">
                                                 <a href="#"><img width="324" height="324" :src="product.product.product_image" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""></a>
                                             </td>
@@ -59,11 +59,11 @@
                                             <td class="product-quantity" data-title="Quantity">
                                                 <div class="quantity">
                                                     <label class="screen-reader-text" for="quantity_5cc58182489a8">Quantity</label>
-                                                    <input type="number" id=" " class="input-text qty text" min="0"  :value="product.quantity" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" aria-labelledby="Sunglasses quantity">
+                                                    <input type="number"  class="input-text qty text" min="0" v-model="product.quantity" @change="updateCartItem(product)"  size="4" pattern="[0-9]*" inputmode="numeric" >
                                                 </div>
                                             </td>
                                             <td class="product-subtotal" data-title="Total">
-                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@{{ products.reduce((total, item) => total + parseFloat(item.price), 0) }}</span>
+                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@{{ products.reduce((total, item) => total + (parseFloat(item.price) * parseFloat(item.quantity)), 0) }}</span>
                                             </td>
                                         </tr>
 
@@ -129,6 +129,24 @@
             }
         },
         methods:{
+            removeCartItem(product_id){
+                let url = '/api/v1/cart/' + product_id;
+                axios.delete(url).then(response => {
+                    if(response.status === 200){
+                        headerCart.getCartProducts();
+                    }
+                });
+            },
+            updateCartItem(product){
+                let url = '/api/v1/cart/' + product.product_id;
+                axios.post(url, {
+                    quantity: product.quantity
+                }).then(response => {
+                    if(response.status === 200){
+                        headerCart.getCartProducts();
+                    }
+                });
+            }
 
         },
         mounted(){

@@ -130,13 +130,13 @@
                                             <a class="font-titles" href="#">@{{ product.product.product_title }}</a>
 
 
-                                            <span class="quantity">1 × <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">@{{ product.price }}<span class="woocommerce-Price-currencySymbol">$</span></span></span></span>
+                                            <span class="quantity">@{{ parseInt(product.quantity) }} × <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">@{{ product.price }}<span class="woocommerce-Price-currencySymbol">$</span></span></span></span>
                                         </div>
                                     </li>
 
                                     <li class="woocommerce-mini-cart-item mini_cart_item">
                                         <div class="woocomerce-mini-cart__container" v-if="products.length > 0">
-                                            <p class="woocommerce-mini-cart__total total"><strong>Subtotal:</strong> <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">@{{ products.reduce((total, item) => total + parseFloat(item.price), 0) }}<span class="woocommerce-Price-currencySymbol">$</span></span></span></p>
+                                            <p class="woocommerce-mini-cart__total total"><strong>Subtotal:</strong> <span class="woocs_special_price_code"><span class="woocommerce-Price-amount amount">@{{ products.reduce((total, item) => total + (parseFloat(item.price) * parseFloat(item.quantity)), 0) }}<span class="woocommerce-Price-currencySymbol">$</span></span></span></p>
                                             <p class="woocommerce-mini-cart__buttons buttons">
                                                 <a href="{{route('cart-product')}}" class="button wc-forward">View cart</a>
                                                 <a href="{{route('cart-checkout')}}" class="button checkout wc-forward">Checkout</a>
