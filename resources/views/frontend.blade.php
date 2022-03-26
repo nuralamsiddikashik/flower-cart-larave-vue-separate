@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{asset('home/assets/css/woocommerce-layouts.css')}}">
     <link rel='stylesheet' id='woocommerce-smallscreen-css'  href='{{asset('/home/assets/css/woocommerce-small-screen.css')}}' type='text/css' media='only screen and (max-width: 768px)' />
     <link rel="stylesheet" href="{{asset('home/assets/css/woocommerce.css')}}">
-
+    <link rel="stylesheet" href="{{ asset('qbadminui/css/toastr.min.css') }}">
     <!--custom css-->
     <link href="{{asset('home/assets/css/main.css')}}" rel="stylesheet">
     @stack('header-js')

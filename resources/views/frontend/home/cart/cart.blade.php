@@ -63,7 +63,7 @@
                                                 </div>
                                             </td>
                                             <td class="product-subtotal" data-title="Total">
-                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@{{ products.reduce((total, item) => total + (parseFloat(item.price) * parseFloat(item.quantity)), 0) }}</span>
+                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@{{ product.price * product.quantity }}</span>
                                             </td>
                                         </tr>
 
@@ -93,16 +93,16 @@
                                 <table cellspacing="0" class="shop_table shop_table_responsive">
                                     <tbody><tr class="cart-subtotal">
                                         <th>Subtotal</th>
-                                        <td data-title="Subtotal"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>18.00</span></td>
+                                        <td data-title="Subtotal"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@{{ products.reduce((total, item) => total + (parseFloat(item.price) * parseFloat(item.quantity)), 0) }}</span></td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>Total</th>
-                                        <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>18.00</span></strong> </td>
+                                        <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>@{{ products.reduce((total, item) => total + (parseFloat(item.price) * parseFloat(item.quantity)), 0) }}</span></strong> </td>
                                     </tr>
                                     </tbody>
                                 </table>
                                 <div class="wc-proceed-to-checkout">
-                                    <a href="http://wc.lab.themebucket.net/checkout/" class="checkout-button button alt wc-forward">
+                                    <a href="{{ route('cart-checkout') }}" class="checkout-button button alt wc-forward">
                                         Proceed to checkout
                                     </a>
                                 </div>

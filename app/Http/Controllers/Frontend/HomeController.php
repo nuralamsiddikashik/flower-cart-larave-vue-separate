@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Contracts\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Models\CartUser;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,16 @@ class HomeController extends Controller {
         return view( 'frontend.home.cart.cart' );
     }
 
-    public function proceedToCheckout() {
+    public function proceedToCheckout(Request $request) {
+        // check cart products
+        if (!$request->session()->has('cartItem')){
+            return redirect()->route('home');
+        }
+
+        $cartItemProducts = CartUser::where('cart_session_id', session('cartItem'))->first();
+        if (!$cartItemProducts){
+            return redirect()->route('home');
+        }
         return view( 'frontend.home.checkout.checkout' );
     }
 }

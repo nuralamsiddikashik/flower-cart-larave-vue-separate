@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'api/v1/'], function (){
     Route::post('cart', [CartController::class, 'addItemToCart']);
     Route::post('cart/{product_id}', [CartController::class, 'updateItemToCart']);
     Route::delete('cart/{product_id}', [CartController::class, 'removeItemToCart']);
+    Route::post('checkout', [CheckoutController::class, 'checkout']);
 });
 
 Route::group( ['middleware' => 'auth'], function () {
