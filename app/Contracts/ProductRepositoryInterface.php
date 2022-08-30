@@ -27,7 +27,13 @@ interface ProductRepositoryInterface {
      */
     public function update( $id, $data );
 
+    /**
+     * @param $id
+     */
     public function destroy( $id );
 
+    /**
+     * @param $product_slug
+     */
     public function findBySlug( $product_slug );
 }

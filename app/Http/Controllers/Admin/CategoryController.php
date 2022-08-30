@@ -14,13 +14,27 @@ use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller {
 
+    /**
+     * @var mixed
+     */
     private $request;
+    /**
+     * @var mixed
+     */
     private $categoryRepository;
+    /**
+     * @param Request $request
+     * @param CategoryRepositoryInterface $categoryRepository
+     */
     public function __construct( Request $request, CategoryRepositoryInterface $categoryRepository ) {
         $this->request            = $request;
         $this->categoryRepository = $categoryRepository;
     }
 
+    /**
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @return mixed
+     */
     public function index( CategoryRepositoryInterface $categoryRepository ) {
         $data['categories'] = $categoryRepository->get()->transform( function ( $category ) {
             $category->image = Category::getFileUrl( $category->image );
@@ -30,6 +44,9 @@ class CategoryController extends Controller {
         return view( 'admin.category.index', $data );
     }
 
+    /**
+     * @param CategoryRepositoryInterface $categoryRepository
+     */
     public function store( CategoryRepositoryInterface $categoryRepository ) {
         try {
             $data = $this->validate( $this->request, [
@@ -62,6 +79,9 @@ class CategoryController extends Controller {
         }
     }
 
+    /**
+     * @param $id
+     */
     public function editCategoryItem( $id ) {
         $data['category'] = $this->categoryRepository->find( $id );
         if ( !$data['category'] ) {
@@ -73,6 +93,10 @@ class CategoryController extends Controller {
         return view( 'admin.category.edit', $data );
     }
 
+    /**
+     * @param $id
+     * @param CategoryRepositoryInterface $categoryRepository
+     */
     public function update( $id, CategoryRepositoryInterface $categoryRepository ) {
         $data['category'] = $this->categoryRepository->find( $id );
         if ( !$data['category'] ) {
@@ -112,6 +136,11 @@ class CategoryController extends Controller {
         }
     }
 
+    /**
+     * @param $id
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @return mixed
+     */
     public function deleteCategory( $id, CategoryRepositoryInterface $categoryRepository ) {
         $deleteImageCategory = $categoryRepository->find( $id );
         if ( !$deleteImageCategory ) {

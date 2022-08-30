@@ -6,6 +6,14 @@ use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
 class Helper {
+    /**
+     * @param UploadedFile $uploaded_file
+     * @param string $folder
+     * @param string $thumbnail
+     * @param string $disk
+     * @param bool $resize
+     * @param falseint $resize_value
+     */
     public static function uploadFile( UploadedFile $uploaded_file, string $folder, string $thumbnail = 'thumbnail', string $disk = 'public', bool $resize = false, int $resize_value = 150 ) {
         $temp_upload_dir = app()->basePath( 'public/uploads' );
         $file_name       = pathinfo( $uploaded_file->getClientOriginalName(), PATHINFO_FILENAME );

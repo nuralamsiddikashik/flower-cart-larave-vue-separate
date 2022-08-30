@@ -6,20 +6,37 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 
 class ProductRepository implements ProductRepositoryInterface {
+    /**
+     * @var mixed
+     */
     private $model;
 
+    /**
+     * @param Product $model
+     */
     public function __construct( Product $model ) {
         $this->model = $model;
     }
 
+    /**
+     * @return mixed
+     */
     public function get() {
         $products = $this->model->select( 'id', 'product_title', 'product_slug', 'product_sku', 'cost_price', 'selling_price', 'quantity', 'product_image' );
         return $products->get();
     }
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function find( $id ) {
         return $this->model->find( $id );
     }
 
+    /**
+     * @param array $data
+     * @return mixed
+     */
     public function store( array $data ) {
         return $this->model->create( [
             'product_title'       => $data['product_title'],
@@ -36,6 +53,10 @@ class ProductRepository implements ProductRepositoryInterface {
         ] );
     }
 
+    /**
+     * @param $id
+     * @param $data
+     */
     public function update( $id, $data ) {
         $product = $this->model->find( $id );
         $product->update( [
@@ -53,9 +74,16 @@ class ProductRepository implements ProductRepositoryInterface {
         ] );
     }
 
+    /**
+     * @param $product_slug
+     * @return mixed
+     */
     public function findBySlug( $product_slug ) {
         return $this->model->where( 'product_slug', $product_slug )->first();
     }
 
+    /**
+     * @param $id
+     */
     public function destroy( $id ) {}
 }

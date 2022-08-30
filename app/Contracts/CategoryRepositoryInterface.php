@@ -26,6 +26,9 @@ interface CategoryRepositoryInterface {
      */
     public function update( $id, $data );
 
+    /**
+     * @param $id
+     */
     public function destroy( $id );
 
 }

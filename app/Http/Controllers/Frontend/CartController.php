@@ -14,6 +14,9 @@ class CartController extends Controller {
     public function __construct() {
 
     }
+    /**
+     * @param Request $request
+     */
     public function currentCartList( Request $request ) {
 
         if ( $request->session()->has( 'cartItem' ) ) {
@@ -27,6 +30,9 @@ class CartController extends Controller {
 
     }
 
+    /**
+     * @param Request $request
+     */
     public function addItemToCart( Request $request ) {
         // create or fetch a cart session id
         if ( $request->session()->has( 'cartItem' ) ) {

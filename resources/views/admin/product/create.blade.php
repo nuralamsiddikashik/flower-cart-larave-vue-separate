@@ -158,7 +158,7 @@
         <div class="page-heading border-bottom d-flex flex-row">
             <h5 class="font-weight-normal" style="cursor: pointer">Category</h5>
         </div>
-    
+
         <div class="row mt-lg-5">
             <div class="col-md-4">
                 <form action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">
@@ -200,9 +200,9 @@
                     </div>
 
                     <div class="form group">
-                        <input type="file" class="form-control" id="product_image" name="product_image"> 
+                        <input type="file" class="form-control" id="product_image" name="product_image">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control">
@@ -220,7 +220,7 @@
                     </div>
                 </form>
             </div>
-         
+
         </div>
     </div>
 </main>

@@ -1,5 +1,5 @@
-   <!--product section start-->
-   <section class="space-3 space-adjust">
+<!--product section start-->
+<section class="space-3 space-adjust">
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-8">
@@ -47,8 +47,8 @@
                             </span>
                         </li>
                     @endforeach
-                  
-                   
+
+
                     <!--default woocommerce markup-->
                     <!--<li class="product">
                         <a href="#" class="#">
